@@ -1,0 +1,35 @@
+import { Component } from '@angular/core';
+import { trigger, state, style, transition, animate, keyframes } from '@angular/animations';
+
+@Component({
+  selector: 'my-app',
+  templateUrl: './app.component.html',
+  styleUrls: [ './app.component.css' ],
+  //adding animation
+  animations: [
+    //setting the direction betwen to different states
+    trigger('pageAnimation', [
+      //state 1
+      state('small', style({
+        transform: 'scale(1)',
+      })),
+
+      //state 2
+      state('large', style({
+        transform: 'scale(1.2)',
+      })),
+
+      transition('small => large', animate('300 ease-in')),
+    ]),
+  ]
+})
+export class AppComponent  {
+
+  //setting default state
+  state: string = 'small';
+
+  //iff small make it large, if large make it small
+  animateIt() {
+    this.state = (this.state === 'small' ? 'large' : 'small');
+  }
+}
