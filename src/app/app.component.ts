@@ -5,6 +5,7 @@ import { trigger, state, style, transition, animate, keyframes } from '@angular/
   selector: 'my-app',
   templateUrl: './app.component.html',
   styleUrls: [ './app.component.css' ],
+
   //adding animation
   animations: [
     //setting the direction betwen to different states
@@ -19,7 +20,12 @@ import { trigger, state, style, transition, animate, keyframes } from '@angular/
         transform: 'scale(1.2)',
       })),
 
-      transition('small => large', animate('300 ease-in')),
+      //setting direction for animation to work - <=> two ways -
+      transition('small <=> large', animate('300ms ease-in', keyframes([
+        style({opacity: 0, transform: 'translateY(-75%)', offset: 0}),
+        style({opacity: 1, transform: 'translateY(30px)', offset: .5}),
+        style({opacity: 1, transform: 'translateY(0)', offset: 1}),
+      ]))),
     ]),
   ]
 })
